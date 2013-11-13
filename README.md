@@ -11,6 +11,9 @@ The following methods are available:
     forecastByCityName(final String cityName);
     forecastByLatitudeLongitude(final float latitude, final float longitude);
     forecastByCityId(final int cityId);
+    dailyForecastByCityName(final String cityName);
+    dailyForecastByLatitudeLongitude(final float latitude, final float longitude);
+    dailyForecastByCityId(final int cityId);
     searchByCityName(final String cityName, final Integer maxResults, final Accuracy accuracy);
     searchByLatitudeLongitude(final float latitude, final float longitude, final Integer maxResults, final Accuracy accuracy);
     
