@@ -21,6 +21,7 @@
 
 package org.huysamen.openweathermap;
 
+import org.huysamen.openweathermap.api.DailyForecastData;
 import org.huysamen.openweathermap.api.ForecastData;
 import org.huysamen.openweathermap.api.SearchData;
 import org.huysamen.openweathermap.api.WeatherData;
@@ -108,6 +109,34 @@ public interface OpenWeatherMapClient {
      * @since 2.5
      */
     public ForecastData forecastByCityId(final int cityId);
+
+    /**
+     * Fetches the daily forecast data.
+     *
+     * @param cityName The name of the city (or search string e.g. 'London,uk').
+     * @return The forecast data.
+     * @since 2.5
+     */
+    public DailyForecastData dailyForecastByCityName(final String cityName);
+
+    /**
+     * Fetches the daily forecast data.
+     *
+     * @param latitude The latitude as a floating point number.
+     * @param longitude The longitude as a floating point number.
+     * @return The forecast data.
+     * @since 2.5
+     */
+    public DailyForecastData dailyForecastByLatitudeLongitude(final float latitude, final float longitude);
+
+    /**
+     * Fetches the daily forecast data.
+     *
+     * @param cityId The city ID
+     * @return The forecast data.
+     * @since 2.5
+     */
+    public DailyForecastData dailyForecastByCityId(final int cityId);
 
     /**
      * Searches for forecast data based on a search term.

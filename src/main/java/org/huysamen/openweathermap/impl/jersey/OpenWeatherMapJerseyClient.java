@@ -23,6 +23,7 @@ package org.huysamen.openweathermap.impl.jersey;
 
 import com.google.gson.Gson;
 import org.huysamen.openweathermap.OpenWeatherMapClient;
+import org.huysamen.openweathermap.api.DailyForecastData;
 import org.huysamen.openweathermap.api.ForecastData;
 import org.huysamen.openweathermap.api.SearchData;
 import org.huysamen.openweathermap.api.WeatherData;
@@ -57,6 +58,7 @@ public class OpenWeatherMapJerseyClient implements OpenWeatherMapClient {
     private final Gson gson = new Gson();
     private final WebTarget weatherTarget;
     private final WebTarget forecastTarget;
+    private final WebTarget dailyForecastTarget;
     private final WebTarget searchTarget;
 
     private Unit unit = Unit.METRIC;
@@ -68,6 +70,7 @@ public class OpenWeatherMapJerseyClient implements OpenWeatherMapClient {
 
         weatherTarget = baseTarget.path("weather");
         forecastTarget = baseTarget.path("forecast");
+        dailyForecastTarget = forecastTarget.path("daily");
         searchTarget = baseTarget.path("find");
     }
 
@@ -129,6 +132,31 @@ public class OpenWeatherMapJerseyClient implements OpenWeatherMapClient {
         return sendRequest(
                 ForecastData.class,
                 forecastTarget,
+                new QueryParameter(QP_ID, cityId));
+    }
+
+    @Override
+    public DailyForecastData dailyForecastByCityName(final String cityName) {
+        return sendRequest(
+                DailyForecastData.class,
+                dailyForecastTarget,
+                new QueryParameter(QP_QUERY, cityName));
+    }
+
+    @Override
+    public DailyForecastData dailyForecastByLatitudeLongitude(final float latitude, final float longitude) {
+        return sendRequest(
+                DailyForecastData.class,
+                dailyForecastTarget,
+                new QueryParameter(QP_LATITUDE, latitude),
+                new QueryParameter(QP_LONGITUDE, longitude));
+    }
+
+    @Override
+    public DailyForecastData dailyForecastByCityId(final int cityId) {
+        return sendRequest(
+                DailyForecastData.class,
+                dailyForecastTarget,
                 new QueryParameter(QP_ID, cityId));
     }
 
